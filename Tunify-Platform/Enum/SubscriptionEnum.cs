@@ -2,9 +2,9 @@
 {
     public enum SubscriptionEnum
     {
-        Album,
-        PlayStation,
-        Playlist,
-        Artist
+        Free,
+        Premium,
+        Family
+
     }
 }
