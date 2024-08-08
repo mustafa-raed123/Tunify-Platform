@@ -9,11 +9,11 @@
 
         public ICollection<PlaylistSong> PlaylistSongs { get; set; } = new List<PlaylistSong>();
 
-        public int ArtistId { get; set; }
-        public Artist Artist { get; set; } = null!;
+        public int ArtistId { get; set; } 
+        public Artist? Artist { get; set; } = null!;
 
         
         public int AlbumId { get; set; }
-        public Album Album { get; set; }
+        public Album? Album { get; set; }
     }
 }
