@@ -51,13 +51,15 @@ Album has a required foreign key ArtistId referencing Artist.
 ---
 # Repository Design Pattern
 
-* Overview*
+* Overview
 The Repository Design Pattern decouples data access logic from the business logic in the application, promoting modularity and testability.
 
-* Implementation *
-In this project, repositories were created for managing data access for the Users, Playlist, Song, and Artist entities. These repositories encapsulate CRUD operations and any additional data access logic, making the application easier to maintain and extend.
+#
 
-Benefits
-Separation of Concerns: Keeps data access logic separate from business logic.
-Testability: Allows for mocking data access during unit tests.
-Flexibility: Facilitates changes in data access strategy without affecting business logic.
+* Implementation 
+In this project, repositories were created for managing data access for the Users, Playlist, Song, and Artist entities. These repositories encapsulate CRUD operations and any additional data access logic, making the application easier to maintain and extend.
+#
+Benefits : 
+* Separation of Concerns: Keeps data access logic separate from business logic.
+* Testability: Allows for mocking data access during unit tests.
+* Flexibility: Facilitates changes in data access strategy without affecting business logic.
