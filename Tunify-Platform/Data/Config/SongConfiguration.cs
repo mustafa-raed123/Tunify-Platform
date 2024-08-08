@@ -21,7 +21,7 @@ namespace Tunify_Platform.Data.Config
                 .IsRequired(false);
             builder.HasOne(x=>x.Album)
                 .WithMany(x=>x.Songs)
-                .HasForeignKey(x=>x.AlbumId);
+                .HasForeignKey(x=>x.AlbumId).IsRequired(false);
 
             builder.HasData(LoadSongs());
             
