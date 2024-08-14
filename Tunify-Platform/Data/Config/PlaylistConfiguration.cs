@@ -13,16 +13,18 @@ namespace Tunify_Platform.Data.Config
             
             builder.HasOne(x=>x.User)
                 .WithMany(x=>x.Playlists)
-                .HasForeignKey(x=>x.UserId).IsRequired(false);
+                .HasForeignKey(x=>x.UserId);
             builder.HasData(LoadPlaylist());
-            
+
         }
 
         private List<Playlist> LoadPlaylist()
         {
-            return new  List<Playlist>(){
-                new Playlist{PlaylistId = 1,PlaylistName = "Rock Classics",CreateDate = new DateTime(2011,4,5)},
-                new Playlist{PlaylistId = 2,PlaylistName = "Pop Hits",CreateDate = new DateTime(2013,5,7) , UserId = 2}                
+            return new List<Playlist>(){
+                new Playlist{PlaylistId = 1,PlaylistName = "Rock Classics",CreateDate = new DateTime(2011,4,5) , UserId = 1},
+                new Playlist{PlaylistId = 2,PlaylistName = "Pop Hits",CreateDate = new DateTime(2013,5,7) , UserId = 2}     ,
+                new Playlist{PlaylistId = 3,PlaylistName = "Pop Hits",CreateDate = new DateTime(2013,5,7) , UserId = 3},
+                
             };
         }
     }

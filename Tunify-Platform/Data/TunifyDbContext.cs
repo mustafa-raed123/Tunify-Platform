@@ -21,6 +21,12 @@ namespace Tunify_Platform.Data
         {
             base.OnModelCreating(modelBuilder);           
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TunifyDbContext).Assembly);
+            modelBuilder.Entity<PlaylistSong>().HasData(
+                   new PlaylistSong { PlaylistSongId = 1, PlaylistId = 1, SongId = 1 },
+                   new PlaylistSong { PlaylistSongId = 2, PlaylistId = 2, SongId = 3 },
+                   new PlaylistSong { PlaylistSongId = 3, PlaylistId = 3, SongId = 2 }
+                );
+
         }
     }
 }

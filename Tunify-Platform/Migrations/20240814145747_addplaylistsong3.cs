@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Tunify_Platform.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class addplaylistsong3 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -71,7 +71,7 @@ namespace Tunify_Platform.Migrations
                     UserName = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Email = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true),
                     Join_Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    SubsciptionId = table.Column<int>(type: "int", nullable: false)
+                    SubsciptionId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -102,8 +102,7 @@ namespace Tunify_Platform.Migrations
                         name: "FK_Songs_albums_AlbumId",
                         column: x => x.AlbumId,
                         principalTable: "albums",
-                        principalColumn: "AlbumId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "AlbumId");
                     table.ForeignKey(
                         name: "FK_Songs_artists_ArtistId",
                         column: x => x.ArtistId,
@@ -162,10 +161,10 @@ namespace Tunify_Platform.Migrations
                 columns: new[] { "SubsciptionsId", "Price", "SubsciptionsType" },
                 values: new object[,]
                 {
-                    { 1, 30m, "Playlist" },
-                    { 2, 24m, "PlayStation" },
-                    { 3, 43m, "Artist" },
-                    { 4, 12m, "Album" }
+                    { 1, 30m, "Family" },
+                    { 2, 24m, "Free" },
+                    { 3, 43m, "Premium" },
+                    { 4, 12m, "Free" }
                 });
 
             migrationBuilder.InsertData(
@@ -173,15 +172,10 @@ namespace Tunify_Platform.Migrations
                 columns: new[] { "ArtistId", "ArtistName", "Bio" },
                 values: new object[,]
                 {
-                    { 1, "aa", " good" },
-                    { 2, "aa", " good" },
-                    { 3, "aa", " good" }
+                    { 1, "Michael Jackson", " good" },
+                    { 2, "Pink Floyd", " good" },
+                    { 3, "The Beatles", " good" }
                 });
-
-            migrationBuilder.InsertData(
-                table: "playlists",
-                columns: new[] { "PlaylistId", "CreateDate", "PlaylistName", "UserId" },
-                values: new object[] { 1, new DateTime(2011, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rock Classics", null });
 
             migrationBuilder.InsertData(
                 table: "Users",
@@ -190,13 +184,49 @@ namespace Tunify_Platform.Migrations
                 {
                     { 1, "Mura@gmail.com", new DateTime(2024, 8, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, "mustafa" },
                     { 2, "mohameda@gmail.com", new DateTime(2024, 1, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), 2, "mohammed" },
-                    { 3, "ahmed@gmail.com", new DateTime(2024, 8, 5, 16, 7, 45, 174, DateTimeKind.Local).AddTicks(8371), 3, "ahmed" }
+                    { 3, "ahmed@gmail.com", new DateTime(2024, 8, 14, 17, 57, 47, 553, DateTimeKind.Local).AddTicks(6079), 3, "ahmed" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "albums",
+                columns: new[] { "AlbumId", "varchar", "ArtistId", "ReleaseDate" },
+                values: new object[,]
+                {
+                    { 1, "Thriller", 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 2, "The Dark Side of the Moon", 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) },
+                    { 3, "Abbey Road", 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Songs",
+                columns: new[] { "SongId", "AlbumId", "ArtistId", "Genre", "duration", "title" },
+                values: new object[,]
+                {
+                    { 1, 1, 1, "Rock", new TimeSpan(0, 0, 33, 55, 0), "Billie Jean" },
+                    { 2, 2, 2, "Rock", new TimeSpan(0, 0, 55, 55, 0), "Bohemian Rhapsody" },
+                    { 3, 2, 2, "Rock", new TimeSpan(0, 0, 55, 55, 0), "Bohemian Rhapsody" },
+                    { 4, 2, 2, "Rock", new TimeSpan(0, 0, 55, 55, 0), "Bohemian Rhapsody" }
                 });
 
             migrationBuilder.InsertData(
                 table: "playlists",
                 columns: new[] { "PlaylistId", "CreateDate", "PlaylistName", "UserId" },
-                values: new object[] { 2, new DateTime(2013, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pop Hits", 2 });
+                values: new object[,]
+                {
+                    { 1, new DateTime(2011, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "Rock Classics", 1 },
+                    { 2, new DateTime(2013, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pop Hits", 2 },
+                    { 3, new DateTime(2013, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified), "Pop Hits", 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "PlaylistsSongs",
+                columns: new[] { "PlaylistSongId", "PlaylistId", "SongId" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 3 },
+                    { 3, 3, 2 }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_albums_ArtistId",
@@ -232,7 +262,8 @@ namespace Tunify_Platform.Migrations
                 name: "IX_Users_SubsciptionId",
                 table: "Users",
                 column: "SubsciptionId",
-                unique: true);
+                unique: true,
+                filter: "[SubsciptionId] IS NOT NULL");
         }
 
         /// <inheritdoc />

@@ -46,12 +46,23 @@ namespace Tunify_Platform.Reposiories.Services
             return songs;
         }
 
+        public async Task<List<Playlist>> GetPlaylistForSong(int songid)
+        {
+            if (songid == 0) return null;
+
+            var playlist = await _tunifyDbContext.playlistSongs
+                 .Where(e=>e.SongId == songid)
+                .Select(e=> e.Playlist).ToListAsync();
+
+            return playlist;
+        }
+         
+
         public async Task<Song> GetSongById(int id)
         {
             var song = await _tunifyDbContext.Songs.FindAsync(id);
             if (song == null)
             {
-
                 return null;
             }
             return song;

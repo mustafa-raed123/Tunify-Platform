@@ -12,8 +12,8 @@ using Tunify_Platform.Data;
 namespace Tunify_Platform.Migrations
 {
     [DbContext(typeof(TunifyDbContext))]
-    [Migration("20240805130745_Initial")]
-    partial class Initial
+    [Migration("20240814145747_addplaylistsong3")]
+    partial class addplaylistsong3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,29 @@ namespace Tunify_Platform.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("albums");
+
+                    b.HasData(
+                        new
+                        {
+                            AlbumId = 1,
+                            AlbumName = "Thriller",
+                            ArtistId = 1,
+                            ReleaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            AlbumId = 2,
+                            AlbumName = "The Dark Side of the Moon",
+                            ArtistId = 2,
+                            ReleaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            AlbumId = 3,
+                            AlbumName = "Abbey Road",
+                            ArtistId = 1,
+                            ReleaseDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("Tunify_Platform.Data.Models.Artist", b =>
@@ -76,19 +99,19 @@ namespace Tunify_Platform.Migrations
                         new
                         {
                             ArtistId = 1,
-                            ArtistName = "aa",
+                            ArtistName = "Michael Jackson",
                             Bio = " good"
                         },
                         new
                         {
                             ArtistId = 2,
-                            ArtistName = "aa",
+                            ArtistName = "Pink Floyd",
                             Bio = " good"
                         },
                         new
                         {
                             ArtistId = 3,
-                            ArtistName = "aa",
+                            ArtistName = "The Beatles",
                             Bio = " good"
                         });
                 });
@@ -123,7 +146,8 @@ namespace Tunify_Platform.Migrations
                         {
                             PlaylistId = 1,
                             CreateDate = new DateTime(2011, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlaylistName = "Rock Classics"
+                            PlaylistName = "Rock Classics",
+                            UserId = 1
                         },
                         new
                         {
@@ -131,6 +155,13 @@ namespace Tunify_Platform.Migrations
                             CreateDate = new DateTime(2013, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PlaylistName = "Pop Hits",
                             UserId = 2
+                        },
+                        new
+                        {
+                            PlaylistId = 3,
+                            CreateDate = new DateTime(2013, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PlaylistName = "Pop Hits",
+                            UserId = 3
                         });
                 });
 
@@ -155,6 +186,26 @@ namespace Tunify_Platform.Migrations
                     b.HasIndex("SongId");
 
                     b.ToTable("PlaylistsSongs", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            PlaylistSongId = 1,
+                            PlaylistId = 1,
+                            SongId = 1
+                        },
+                        new
+                        {
+                            PlaylistSongId = 2,
+                            PlaylistId = 2,
+                            SongId = 3
+                        },
+                        new
+                        {
+                            PlaylistSongId = 3,
+                            PlaylistId = 3,
+                            SongId = 2
+                        });
                 });
 
             modelBuilder.Entity("Tunify_Platform.Data.Models.Song", b =>
@@ -190,6 +241,44 @@ namespace Tunify_Platform.Migrations
                     b.HasIndex("ArtistId");
 
                     b.ToTable("Songs", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            SongId = 1,
+                            AlbumId = 1,
+                            ArtistId = 1,
+                            Genre = "Rock",
+                            duration = new TimeSpan(0, 0, 33, 55, 0),
+                            title = "Billie Jean"
+                        },
+                        new
+                        {
+                            SongId = 2,
+                            AlbumId = 2,
+                            ArtistId = 2,
+                            Genre = "Rock",
+                            duration = new TimeSpan(0, 0, 55, 55, 0),
+                            title = "Bohemian Rhapsody"
+                        },
+                        new
+                        {
+                            SongId = 3,
+                            AlbumId = 2,
+                            ArtistId = 2,
+                            Genre = "Rock",
+                            duration = new TimeSpan(0, 0, 55, 55, 0),
+                            title = "Bohemian Rhapsody"
+                        },
+                        new
+                        {
+                            SongId = 4,
+                            AlbumId = 2,
+                            ArtistId = 2,
+                            Genre = "Rock",
+                            duration = new TimeSpan(0, 0, 55, 55, 0),
+                            title = "Bohemian Rhapsody"
+                        });
                 });
 
             modelBuilder.Entity("Tunify_Platform.Data.Models.Subscription", b =>
@@ -217,25 +306,25 @@ namespace Tunify_Platform.Migrations
                         {
                             SubsciptionsId = 1,
                             Price = 30m,
-                            SubsciptionsType = "Playlist"
+                            SubsciptionsType = "Family"
                         },
                         new
                         {
                             SubsciptionsId = 2,
                             Price = 24m,
-                            SubsciptionsType = "PlayStation"
+                            SubsciptionsType = "Free"
                         },
                         new
                         {
                             SubsciptionsId = 3,
                             Price = 43m,
-                            SubsciptionsType = "Artist"
+                            SubsciptionsType = "Premium"
                         },
                         new
                         {
                             SubsciptionsId = 4,
                             Price = 12m,
-                            SubsciptionsType = "Album"
+                            SubsciptionsType = "Free"
                         });
                 });
 
@@ -254,7 +343,7 @@ namespace Tunify_Platform.Migrations
                     b.Property<DateTime>("Join_Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("SubsciptionId")
+                    b.Property<int?>("SubsciptionId")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -265,7 +354,8 @@ namespace Tunify_Platform.Migrations
                     b.HasKey("UserId");
 
                     b.HasIndex("SubsciptionId")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[SubsciptionId] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
 
@@ -290,7 +380,7 @@ namespace Tunify_Platform.Migrations
                         {
                             UserId = 3,
                             Email = "ahmed@gmail.com",
-                            Join_Date = new DateTime(2024, 8, 5, 16, 7, 45, 174, DateTimeKind.Local).AddTicks(8371),
+                            Join_Date = new DateTime(2024, 8, 14, 17, 57, 47, 553, DateTimeKind.Local).AddTicks(6079),
                             SubsciptionId = 3,
                             UserName = "ahmed"
                         });
@@ -339,9 +429,7 @@ namespace Tunify_Platform.Migrations
                 {
                     b.HasOne("Tunify_Platform.Data.Models.Album", "Album")
                         .WithMany("Songs")
-                        .HasForeignKey("AlbumId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AlbumId");
 
                     b.HasOne("Tunify_Platform.Data.Models.Artist", "Artist")
                         .WithMany("Songs")

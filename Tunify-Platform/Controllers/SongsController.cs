@@ -31,7 +31,7 @@ namespace Tunify_Platform.Controllers
             return Ok(AllSongs);
         }
 
-        // GET: api/Songs/5
+        //GET: api/Songs/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Song>> GetSong(int id)
         {
@@ -76,7 +76,15 @@ namespace Tunify_Platform.Controllers
             else
                 return deleteSong;
         }
+        [HttpGet]
+        // api/Songs/GetPlaylistForSong/2
+        [Route("{action}/{id}")] 
+        public async Task<List<Playlist>> GetPlaylistForSong(int id)
+        {
+            var playlist = await _song.GetPlaylistForSong(id);
+            return playlist;
+        }
 
- 
+
     }
 }

@@ -23,9 +23,9 @@ namespace Tunify_Platform.Data.Config
         {
             return new List<User>
             {
-                new User {UserId = 1 ,UserName = "mustafa", Email = "Mura@gmail.com" , Join_Date =new DateTime(2024, 8, 5) , SubsciptionId = 1 },
-                new User {UserId = 2 ,UserName = "mohammed", Email = "mohameda@gmail.com" , Join_Date =new DateTime(2024, 1, 2) , SubsciptionId = 2 },
-                new User {UserId = 3 ,UserName = "ahmed", Email = "ahmed@gmail.com" , Join_Date =DateTime.Now, SubsciptionId = 3 },
+                new User {UserId =   1 ,UserName = "mustafa", Email = "Mura@gmail.com" , Join_Date =new DateTime(2024, 8, 5) , SubsciptionId = 1 },
+                new User {UserId =   2 ,UserName = "mohammed", Email = "mohameda@gmail.com" , Join_Date =new DateTime(2024, 1, 2) , SubsciptionId = 2 },
+                new User {UserId =   3,UserName = "ahmed", Email = "ahmed@gmail.com" , Join_Date =DateTime.Now, SubsciptionId = 3 },
 
             };
         }

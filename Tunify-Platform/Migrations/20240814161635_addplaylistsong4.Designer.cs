@@ -12,8 +12,8 @@ using Tunify_Platform.Data;
 namespace Tunify_Platform.Migrations
 {
     [DbContext(typeof(TunifyDbContext))]
-    [Migration("20240808111319_edit-song")]
-    partial class editsong
+    [Migration("20240814161635_addplaylistsong4")]
+    partial class addplaylistsong4
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,7 +146,8 @@ namespace Tunify_Platform.Migrations
                         {
                             PlaylistId = 1,
                             CreateDate = new DateTime(2011, 4, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            PlaylistName = "Rock Classics"
+                            PlaylistName = "Rock Classics",
+                            UserId = 1
                         },
                         new
                         {
@@ -154,6 +155,13 @@ namespace Tunify_Platform.Migrations
                             CreateDate = new DateTime(2013, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             PlaylistName = "Pop Hits",
                             UserId = 2
+                        },
+                        new
+                        {
+                            PlaylistId = 3,
+                            CreateDate = new DateTime(2013, 5, 7, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PlaylistName = "Pop Hits",
+                            UserId = 3
                         });
                 });
 
@@ -177,7 +185,27 @@ namespace Tunify_Platform.Migrations
 
                     b.HasIndex("SongId");
 
-                    b.ToTable("PlaylistsSongs", (string)null);
+                    b.ToTable("playlistSongs");
+
+                    b.HasData(
+                        new
+                        {
+                            PlaylistSongId = 1,
+                            PlaylistId = 1,
+                            SongId = 1
+                        },
+                        new
+                        {
+                            PlaylistSongId = 2,
+                            PlaylistId = 2,
+                            SongId = 3
+                        },
+                        new
+                        {
+                            PlaylistSongId = 3,
+                            PlaylistId = 3,
+                            SongId = 2
+                        });
                 });
 
             modelBuilder.Entity("Tunify_Platform.Data.Models.Song", b =>
@@ -227,6 +255,24 @@ namespace Tunify_Platform.Migrations
                         new
                         {
                             SongId = 2,
+                            AlbumId = 2,
+                            ArtistId = 2,
+                            Genre = "Rock",
+                            duration = new TimeSpan(0, 0, 55, 55, 0),
+                            title = "Bohemian Rhapsody"
+                        },
+                        new
+                        {
+                            SongId = 3,
+                            AlbumId = 2,
+                            ArtistId = 2,
+                            Genre = "Rock",
+                            duration = new TimeSpan(0, 0, 55, 55, 0),
+                            title = "Bohemian Rhapsody"
+                        },
+                        new
+                        {
+                            SongId = 4,
                             AlbumId = 2,
                             ArtistId = 2,
                             Genre = "Rock",
@@ -334,7 +380,7 @@ namespace Tunify_Platform.Migrations
                         {
                             UserId = 3,
                             Email = "ahmed@gmail.com",
-                            Join_Date = new DateTime(2024, 8, 8, 14, 13, 19, 105, DateTimeKind.Local).AddTicks(5573),
+                            Join_Date = new DateTime(2024, 8, 14, 19, 16, 35, 269, DateTimeKind.Local).AddTicks(8716),
                             SubsciptionId = 3,
                             UserName = "ahmed"
                         });

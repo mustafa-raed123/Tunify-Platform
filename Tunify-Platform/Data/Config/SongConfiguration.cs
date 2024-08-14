@@ -33,6 +33,8 @@ namespace Tunify_Platform.Data.Config
             {
                 new Song {SongId = 1 , title = "Billie Jean" , ArtistId = 1 , AlbumId = 1 , Genre = "Rock", duration = new TimeSpan(0 , 33 , 55)},
                 new Song {SongId = 2 , title = "Bohemian Rhapsody" , ArtistId = 2 , AlbumId = 2 , Genre = "Rock", duration = new TimeSpan(0 , 55 , 55)},
+                new Song {SongId = 3 , title = "Bohemian Rhapsody" , ArtistId = 2 , AlbumId = 2 , Genre = "Rock", duration = new TimeSpan(0 , 55 , 55)},
+                new Song {SongId = 4 , title = "Bohemian Rhapsody" , ArtistId = 2 , AlbumId = 2 , Genre = "Rock", duration = new TimeSpan(0 , 55 , 55)},
 
             };
         }
