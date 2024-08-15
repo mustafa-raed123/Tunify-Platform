@@ -64,3 +64,31 @@ Benefits :
 * Testability: Allows for mocking data access during unit tests.
 * Flexibility: Facilitates changes in data access strategy without affecting business logic.
 
+---
+
+# New Navigation and Routing Functionalities
+In this lab, we have added new routing functionalities to manage the relationships between playlists, songs, and artists in the Tunify platform. These enhancements allow users to interact with the platform through specific API endpoints designed for adding and retrieving songs in relation to playlists and artists.
+
+ Playlist-Song Relationships
+* Add a Song to a Playlist:
+
+Endpoint: POST api/playlists/{playlistId}/songs/{songId}
+Description: This endpoint allows users to add a specific song to a playlist. The playlistId and songId are passed as route parameters to identify the playlist and the song to be added.
+
+* Retrieve All Songs in a Playlist:
+
+Endpoint: GET api/Songs/GetSongsByPlaylist/2
+
+Description: This endpoint retrieves all the songs associated with a specific playlist. The playlistId is passed as a route parameter to identify the playlist.
+
+  Artist-Song Relationships
+
+* Add a Song to an Artist:
+
+Endpoint: POST /api/Songs/GetAllsongsbyanartist/2
+Description: This endpoint allows users to associate a specific song with an artist. The artistId and songId are passed as route parameters to identify the artist and the song to be added.
+* Retrieve All Songs by an Artist:
+
+Endpoint: GET api/Songs/artists/1/songs/2
+Description: This endpoint retrieves all songs that have been associated with a specific artist. The artistId is passed as a route parameter to identify the artist.
+

@@ -9,7 +9,7 @@
 
         public ICollection<PlaylistSong> PlaylistSongs { get; set; } = new List<PlaylistSong>();
 
-        public int ArtistId { get; set; } 
+        public int? ArtistId { get; set; } 
         public Artist? Artist { get; set; } = null!;
 
         

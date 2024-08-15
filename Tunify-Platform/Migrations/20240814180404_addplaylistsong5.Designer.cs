@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Tunify_Platform.Data;
 
@@ -11,9 +12,11 @@ using Tunify_Platform.Data;
 namespace Tunify_Platform.Migrations
 {
     [DbContext(typeof(TunifyDbContext))]
-    partial class TunifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240814180404_addplaylistsong5")]
+    partial class addplaylistsong5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,17 +167,45 @@ namespace Tunify_Platform.Migrations
 
             modelBuilder.Entity("Tunify_Platform.Data.Models.PlaylistSong", b =>
                 {
+                    b.Property<int>("PlaylistSongId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PlaylistSongId"));
+
                     b.Property<int>("PlaylistId")
                         .HasColumnType("int");
 
                     b.Property<int>("SongId")
                         .HasColumnType("int");
 
-                    b.HasKey("PlaylistId", "SongId");
+                    b.HasKey("PlaylistSongId");
+
+                    b.HasIndex("PlaylistId");
 
                     b.HasIndex("SongId");
 
-                    b.ToTable("PlaylistsSongs", (string)null);
+                    b.ToTable("playlistSongs");
+
+                    b.HasData(
+                        new
+                        {
+                            PlaylistSongId = 1,
+                            PlaylistId = 1,
+                            SongId = 1
+                        },
+                        new
+                        {
+                            PlaylistSongId = 2,
+                            PlaylistId = 2,
+                            SongId = 3
+                        },
+                        new
+                        {
+                            PlaylistSongId = 3,
+                            PlaylistId = 3,
+                            SongId = 2
+                        });
                 });
 
             modelBuilder.Entity("Tunify_Platform.Data.Models.Song", b =>
@@ -349,7 +380,7 @@ namespace Tunify_Platform.Migrations
                         {
                             UserId = 3,
                             Email = "ahmed@gmail.com",
-                            Join_Date = new DateTime(2024, 8, 15, 9, 51, 5, 835, DateTimeKind.Local).AddTicks(3109),
+                            Join_Date = new DateTime(2024, 8, 14, 21, 4, 4, 75, DateTimeKind.Local).AddTicks(958),
                             SubsciptionId = 3,
                             UserName = "ahmed"
                         });
