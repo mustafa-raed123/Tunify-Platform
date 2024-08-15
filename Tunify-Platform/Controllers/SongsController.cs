@@ -43,7 +43,7 @@ namespace Tunify_Platform.Controllers
         // PUT: api/Songs/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult  > PutSong(int id, Song song)
+        public async Task<IActionResult> PutSong(int id, Song song)
         {
             if (id != song.SongId)
             {
@@ -77,14 +77,41 @@ namespace Tunify_Platform.Controllers
                 return deleteSong;
         }
         [HttpGet]
-        // api/Songs/GetPlaylistForSong/2
+        // api/Songs/GetSongsByPlaylist/2
         [Route("{action}/{id}")] 
-        public async Task<List<Playlist>> GetPlaylistForSong(int id)
+        public async Task<List<Song>> GetSongsByPlaylist(int id)
         {
-            var playlist = await _song.GetPlaylistForSong(id);
-            return playlist;
+            var SongInPlayList = await _song.GetSongsByPlaylist(id);
+            return SongInPlayList;
         }
 
+        // api/Songs/playlists/2/songs/1
+        [HttpPost("playlists/{playlistId}/songs/{songId}")]
+
+        public async Task<ActionResult<PlaylistSong>> AddSongToPlaylist(int songId, int playlistId)
+        {
+            
+              var PlayliStsong = await _song.AddSongToPlaylist(songId, playlistId);
+            return Ok(PlayliStsong);
+
+        }
+        //api/Songs/GetAllsongsbyanartist/2
+        [HttpGet]
+        [Route("[action]/{ArtistId}")]
+        public async Task<ActionResult<List<Song>>> GetAllsongsbyanartist(int ArtistId)
+        {
+            var AssSongs = await _song.GetAllsongsbyanartists(ArtistId);
+            if(AssSongs == null) return NotFound();
+            return Ok(AssSongs);
+        }
+        //api/Songs/artists/1/songs/2
+        [HttpPost("artists/{artistId}/songs/{songId}")]
+        public async Task<ActionResult<Song>> AddSongToArtist(int artistId, int songId)
+        {
+            var AddSongToArtist = await _song.AddSongToArtist(artistId, songId);
+            return Ok(AddSongToArtist);
+
+        }
 
     }
 }

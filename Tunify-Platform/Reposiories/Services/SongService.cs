@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Tunify_Platform.Data;
 using Tunify_Platform.Data.Models;
 using Tunify_Platform.Reposiories.Interface;
@@ -12,6 +13,31 @@ namespace Tunify_Platform.Reposiories.Services
         {
             _tunifyDbContext = tunifyDbContext;
         }
+
+        public async Task<Song> AddSongToArtist(int artistId, int songId)
+        {
+            var song = await _tunifyDbContext.Songs.FirstOrDefaultAsync(e=>e.SongId == songId);
+            song.ArtistId = artistId;
+            await _tunifyDbContext.SaveChangesAsync();
+            return song;
+
+        }
+
+        public async Task<PlaylistSong> AddSongToPlaylist(int songid, int playlistid)
+        {
+            
+            var PlaylistSong = new PlaylistSong
+            {
+                SongId = songid,
+                PlaylistId = playlistid
+            };
+            _tunifyDbContext.Entry(PlaylistSong).State = EntityState.Added;
+            //await _tunifyDbContext.playlistSongs.AddAsync(PlaylistSong);
+            await _tunifyDbContext.SaveChangesAsync();
+            return PlaylistSong;
+
+        }
+
         public async Task<Song> CreateSong(Song song)
         {
             _tunifyDbContext.Songs.Add(song);
@@ -46,15 +72,26 @@ namespace Tunify_Platform.Reposiories.Services
             return songs;
         }
 
-        public async Task<List<Playlist>> GetPlaylistForSong(int songid)
+        public async Task<List<Song>> GetAllsongsbyanartists(int ArtistId)
+        {            
+            List<Song> AllSongs = await _tunifyDbContext
+                .Songs
+                .Where(e => e.ArtistId == ArtistId).ToListAsync();
+
+            if (AllSongs.Count == 0) return null;
+
+            return AllSongs;
+        }
+
+        public async Task<List<Song>> GetSongsByPlaylist(int playlistid)
         {
-            if (songid == 0) return null;
+            if (playlistid == 0) return null;
 
-            var playlist = await _tunifyDbContext.playlistSongs
-                 .Where(e=>e.SongId == songid)
-                .Select(e=> e.Playlist).ToListAsync();
-
-            return playlist;
+            var SongsInPlayList = await _tunifyDbContext.playlistSongs
+                 .Where(e=>e.PlaylistId == playlistid)
+                .Select(e=> e.Song).ToListAsync();
+               await _tunifyDbContext.SaveChangesAsync();
+            return SongsInPlayList;
         }
          
 
@@ -86,9 +123,12 @@ namespace Tunify_Platform.Reposiories.Services
 
             return song;
         }
+
         private bool SongExists(int id)
         {
             return (_tunifyDbContext.Songs?.Any(e => e.SongId == id)).GetValueOrDefault();
         }
+
+        
     }
 }
