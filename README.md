@@ -92,3 +92,38 @@ Description: This endpoint allows users to associate a specific song with an art
 Endpoint: GET api/Songs/artists/1/songs/2
 Description: This endpoint retrieves all songs that have been associated with a specific artist. The artistId is passed as a route parameter to identify the artist.
 
+---
+# Swagger UI Integration
+# Overview
+In this lab, Swagger UI has been integrated to provide a user-friendly interface for interacting with the Tunify API. Swagger UI automatically generates interactive documentation based on the API's structure, allowing you to test and explore API endpoints directly from your browser.
+
+ ccessing Swagger UI
+* To access Swagger UI:
+
+Ensure that the application is running by executing the project. You can do this by running the following command in your project directory:
+
+bash
+Copy code
+
+dotnet run
+Alternatively, you can start the application from Visual Studio by pressing F5 or Ctrl + F5.
+
+Once the application is running, open your web browser and navigate to the following URL:
+
+
+Copy code
+* http://localhost:7258
+
+This will direct you to the Swagger UI interface.
+
+* Using Swagger UI
+Explore API Endpoints: The main page of Swagger UI will list all available API endpoints, organized by categories (e.g., Artists, Playlists, Songs). Click on any endpoint to expand and view details such as request parameters, responses, and status codes.
+
+Execute API Calls: You can test any endpoint directly from the Swagger UI. To do this:
+
+Expand the desired endpoint.
+Click on the Try it out button.
+Fill in any required parameters.
+Click on the Execute button to send the request.
+The response will be displayed below, showing the status code, response body, and any relevant headers.
+View JSON Schema: Each endpoint provides an example request body and response schema in JSON format, which can be useful for understanding the structure of the data being sent and received.
