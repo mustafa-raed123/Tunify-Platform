@@ -7,7 +7,7 @@
         public string? Bio { get; set; }
         public ICollection<Song>? Songs { get; set; } = new List<Song>();
 
-        public ICollection<Album> Albums { get; set; } = new List<Album>();
+        public ICollection<Album>? Albums { get; set; } = new List<Album>();
 
     }
 }
