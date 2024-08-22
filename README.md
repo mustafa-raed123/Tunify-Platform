@@ -103,7 +103,6 @@ In this lab, Swagger UI has been integrated to provide a user-friendly interface
 Ensure that the application is running by executing the project. You can do this by running the following command in your project directory:
 
 bash
-Copy code
 
 dotnet run
 Alternatively, you can start the application from Visual Studio by pressing F5 or Ctrl + F5.
@@ -111,8 +110,7 @@ Alternatively, you can start the application from Visual Studio by pressing F5 o
 Once the application is running, open your web browser and navigate to the following URL:
 
 
-Copy code
-* http://localhost:7258
+* http://localhost:5062
 
 This will direct you to the Swagger UI interface.
 
@@ -127,3 +125,86 @@ Fill in any required parameters.
 Click on the Execute button to send the request.
 The response will be displayed below, showing the status code, response body, and any relevant headers.
 View JSON Schema: Each endpoint provides an example request body and response schema in JSON format, which can be useful for understanding the structure of the data being sent and received.
+
+---
+
+# Identity
+
+This section covers the Identity Management implementation in the Tunify Platform. It includes user authentication, role management, and session handling using ASP.NET Core Identity.
+
+ * Features
+User Registration: Allows new users to sign up with their details.
+User Login and Logout: Provides authentication and session management for users.
+Role Management: Supports user roles and claims for authorization.
+Session Management: Handles user sessions and token-based authentication.
+	
+	
+
+
+
+
+*  Setting Up Identity
+Install Necessary Packages:
+Ensure you have the following NuGet packages installed:
+
+Microsoft.AspNetCore.Identity.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.SqlServer (or the database provider of your choice)
+You can install these packages using the NuGet Package Manager or the following commands:
+
+```
+dotnet add package Microsoft.AspNetCore.Identity.EntityFrameworkCore
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer
+```
+ 
+ * Configure Identity in Startup.cs:
+
+In the Program.cs, add the following configuration to set up Identity:
+
+```
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
+.AddEntityFrameworkStores<TunifyDbContext>()
+.AddDefaultTokenProviders();
+
+ app.UseAuthentication();
+```
+
+* Registration
+To register a new user, you can use the following API endpoint:
+
+Endpoint: POST /api/account/register
+
+Request Body:
+```
+{
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string",
+  "password": "string"
+}
+```
+Response: A success message or validation errors if the registration fails.
+
+* Login
+To log in a user, use the following API endpoint:
+
+Endpoint: POST /api/account/login
+
+Request Body:
+
+json
+```
+{
+  "username": "string",
+  "password": "string"
+}
+```
+Response: An authentication token if the login is successful, or an error message if the login fails.
+
+* Logout
+To log out a user, use the following API endpoint:
+
+Endpoint: POST /api/account/logout
+Request: No request body required.
+Response: A success message indicating the user has been logged out

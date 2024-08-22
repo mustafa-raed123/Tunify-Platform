@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Tunify_Platform.Data.Models;
 
 namespace Tunify_Platform.Data
 {
-    public class TunifyDbContext : DbContext
+    public class TunifyDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<User> users { get; set; }
         public DbSet<Subscription> subsciptions {  get; set; } 
