@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +25,7 @@ namespace Tunify_Platform.Controllers
 
         // GET: api/Artists
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Artist>>> Getartists()
         {
             var AllArtist = await _context.GetAllArtists();

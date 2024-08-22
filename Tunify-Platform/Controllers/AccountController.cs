@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Tunify_Platform.Data.Models.DTo;
@@ -56,6 +58,20 @@ namespace Tunify_Platform.Controllers
         {
             await user.SignOut();
             return Ok();
+        }
+        [AllowAnonymous]
+        [HttpPost]
+        public async Task<IActionResult> IsEmailAvailable(string Email)
+        {
+            //Check If the Email Id is Already in the Database
+            bool IsValid =  await user.IsEmailAvailable(Email);
+            if (IsValid)
+            {
+                return Ok();
+            }
+            return 
+                BadRequest("Email {Email} is already in use.");
+
         }
     }
 }

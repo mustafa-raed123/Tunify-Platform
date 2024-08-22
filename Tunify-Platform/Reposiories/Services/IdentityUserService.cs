@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Tunify_Platform.Data.Models;
 using Tunify_Platform.Data.Models.DTo;
@@ -47,7 +48,11 @@ namespace Tunify_Platform.Reposiories.Services
                 Email = registerUser.Email,
                 UserName = registerUser.FirstName + registerUser.LastName,
             };
-
+            var email = await userManager.FindByEmailAsync(registerUser.Email);
+            if (email != null)
+            {
+                return null;
+            }
             var result = await userManager.CreateAsync(user, registerUser.Password);
 
             if (result.Succeeded)
@@ -83,6 +88,18 @@ namespace Tunify_Platform.Reposiories.Services
         public async Task SignOut()
         {
             await signin.SignOutAsync();
+        }
+        public async Task<bool> IsEmailAvailable(string Email)
+        {
+            var email = await userManager.FindByEmailAsync(Email);
+            if (email == null)
+            {
+                return (true);
+            }
+            else
+            {
+                return (false);
+            }
         }
     }
 }
