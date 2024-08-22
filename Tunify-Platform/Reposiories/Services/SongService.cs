@@ -74,8 +74,7 @@ namespace Tunify_Platform.Reposiories.Services
 
         public async Task<List<Song>> GetAllsongsbyanartists(int ArtistId)
         {            
-            List<Song> AllSongs = await _tunifyDbContext
-                .Songs
+            List<Song> AllSongs = await _tunifyDbContext.Songs
                 .Where(e => e.ArtistId == ArtistId).ToListAsync();
 
             if (AllSongs.Count == 0) return null;
