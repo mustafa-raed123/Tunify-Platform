@@ -27,6 +27,7 @@ namespace Tunify_Platform
             builder.Services.AddScoped<IPlaylist, PlaylistService>();
 
               builder.Services.AddScoped<IUserAuthentication, IdentityUserService>();
+            builder.Services.AddScoped<jwtTokenService>();
 
             builder.Services.AddSwaggerGen(options =>
             {
