@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Tunify_Platform.Data.Models;
 
@@ -29,6 +30,24 @@ namespace Tunify_Platform.Data
             //        );
 
             //}
+            modelBuilder.Entity<IdentityRole>().HasData(
+                CreateRole("Admin"),
+                CreateRole("User"),
+                CreateRole("Artist")
+            );
+    
+
         }
+        public IdentityRole CreateRole(string  roleName , params string[] permission)
+        {
+            var role = new IdentityRole()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Name = roleName,
+                NormalizedName = roleName.ToUpper(),
+                ConcurrencyStamp = Guid.NewGuid().ToString()
+            };
+            return role;
+        } 
     }
 }

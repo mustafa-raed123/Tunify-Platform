@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,7 @@ namespace Tunify_Platform.Controllers
             if (AllUsers == null) return NotFound();
             return Ok(AllUsers);
         }
+        [Authorize(Roles = "Admin")]
 
         // GET: api/Users/5
         [HttpGet("{id}")]
@@ -67,7 +69,7 @@ namespace Tunify_Platform.Controllers
 
             return await _users.CreateUser(user);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Users/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<User>> DeleteUser(int id)
