@@ -210,7 +210,7 @@ Request: No request body required.
 Response: A success message indicating the user has been logged out
 
 
-#JWT
+# JWT
 
 JWT (JSON Web Token) is a widely-used method for securing API endpoints by issuing tokens that clients must include in their requests. Additionally
 
