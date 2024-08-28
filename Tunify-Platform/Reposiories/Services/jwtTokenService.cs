@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Text;
 using Tunify_Platform.Data.Models;
 
@@ -41,23 +42,18 @@ namespace Tunify_Platform.Reposiories.Services
             return new SymmetricSecurityKey(secretBytes);
 
         }
-        public async Task<string> GenerateToken(ApplicationUser user, TimeSpan expiryDate)
+        public string GenerateToken(ClaimsPrincipal userPrincipal)
         {
-            var userPrincliple = await signInManager.CreateUserPrincipalAsync(user);
-            if (userPrincliple == null)
-            {
-                return null;
-            }
-
-            var signInKey = GetSecurityKey(configuration);
-
-            var token = new JwtSecurityToken
-                (
-                expires: DateTime.UtcNow + expiryDate,
-                signingCredentials: new SigningCredentials(signInKey, SecurityAlgorithms.HmacSha256),
-                claims: userPrincliple.Claims
+            
+            var key = GetSecurityKey(configuration);
+                        
+            var token = new JwtSecurityToken(
+                claims: userPrincipal.Claims.ToList(),
+                expires: DateTime.UtcNow.AddDays(1),  
+                signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
                 );
 
+           
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 

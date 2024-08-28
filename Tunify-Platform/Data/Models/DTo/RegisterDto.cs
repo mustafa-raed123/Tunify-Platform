@@ -7,12 +7,11 @@ namespace Tunify_Platform.Data.Models.DTo
     {
         [Display(Name = "Last Name")]
         public string? FirstName { get; set; }
-        public string? LastName { get; set; }
-
-
+      
         [Remote(action: "IsEmailAvailable", controller: "AccountController")]
         public string? Email { get; set; }
         public string? Password { get; set; }
+        public IList<string>? Roles { get; set; }
 
     }
 }

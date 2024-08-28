@@ -12,6 +12,7 @@ using Tunify_Platform.Reposiories.Interface;
 
 namespace Tunify_Platform.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class ArtistsController : ControllerBase
@@ -22,7 +23,7 @@ namespace Tunify_Platform.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         // GET: api/Artists
         [HttpGet]
         [AllowAnonymous]
@@ -32,7 +33,7 @@ namespace Tunify_Platform.Controllers
             if (AllArtist == null) return NotFound();
             return Ok(AllArtist);
         }
-
+        [Authorize]
         // GET: api/Artists/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Artist>> GetArtist(int id)
@@ -41,7 +42,7 @@ namespace Tunify_Platform.Controllers
             if (Artist == null) return NotFound();
             return Ok(Artist);
         }
-
+        [Authorize(Roles = "Admin")]
         // PUT: api/Artists/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -68,7 +69,7 @@ namespace Tunify_Platform.Controllers
         {
             return await _context.CreateArtist(artist);
         }
-
+        [Authorize(Roles = "Admin")]
         // DELETE: api/Artists/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteArtist(int id)

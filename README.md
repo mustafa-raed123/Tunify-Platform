@@ -208,3 +208,38 @@ To log out a user, use the following API endpoint:
 Endpoint: POST /api/account/logout
 Request: No request body required.
 Response: A success message indicating the user has been logged out
+
+
+#JWT
+
+JWT (JSON Web Token) is a widely-used method for securing API endpoints by issuing tokens that clients must include in their requests. Additionally
+
+* Setting Up JWT-based Authentication
+ Install the Necessary Packages
+```
+{
+ dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+}
+```
+
+* Configure JWT in appsettings.json
+
+```
+{
+"JwtSettings": {
+  "key": "YourSecretKey12345",  
+}
+
+```
+*  Configure JWT Authentication in Startup.cs
+	
+* Generate JWT Token
+
+* Securing API Endpoints
+
+1. Add [Authorize] attributes to secure API endpoints.
+2. Use role-based and policy-based authorization as needed.
+
+* Managing Roles and Claims
+1. Seed initial roles and a default admin user in TunifyDbContext.
+2. Assign roles and claims to users and secure endpoints based on these roles.
